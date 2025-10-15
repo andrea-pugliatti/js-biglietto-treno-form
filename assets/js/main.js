@@ -15,13 +15,35 @@ const routeLengthField = document.getElementById("route-length-field");
 const ageField = document.getElementById("age-field");
 const buttonElement = document.querySelector("button");
 
-// Values
-const price_by_km = 0.21;
-const minor_discount = 0.2;
-const senior_discount = 0.4;
-
-let age;
 let distance;
+let age;
+
+/**
+ * Calculate the price of the ticket
+ * @param {number} distance
+ * @param {number} age
+ * @returns {number}
+ */
+const handleTicket = (distance, age) => {
+	const price_by_km = 0.21;
+	const minor_discount = 0.2;
+	const senior_discount = 0.4;
+
+	// Multiply the distance by the price
+	let cost = distance * price_by_km;
+
+	// Discount for minors
+	if (age < 18) {
+		cost -= cost * minor_discount;
+	}
+
+	// Discount for seniors
+	if (age >= 65) {
+		cost -= cost * senior_discount;
+	}
+
+	return cost.toFixed(2);
+};
 
 buttonElement.addEventListener("click", (event) => {
 	// Prevent refresh
@@ -30,4 +52,9 @@ buttonElement.addEventListener("click", (event) => {
 	// Save values on click
 	age = ageField.value;
 	distance = routeLengthField.value;
+	console.log(distance, age);
+
+	// Calculate the price of the ticket
+	const ticket = handleTicket(distance, age);
+	console.log(ticket);
 });
