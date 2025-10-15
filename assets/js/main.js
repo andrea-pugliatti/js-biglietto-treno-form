@@ -10,3 +10,11 @@ va applicato uno sconto del 20% per i minorenni
 va applicato uno sconto del 40% per gli over 65.
 
 */
+// Select input elements
+const routeLengthInputElement = document.getElementById("route-length-field");
+const ageInputElement = document.getElementById("age-field");
+
+// Values
+const price_by_km = 0.21;
+const minor_discount = 0.2;
+const senior_discount = 0.4;
