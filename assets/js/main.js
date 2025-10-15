@@ -15,6 +15,7 @@ va applicato uno sconto del 40% per gli over 65.
 const routeLengthField = document.getElementById("route-length-field");
 const ageField = document.getElementById("age-field");
 const nameField = document.getElementById("name-field");
+const classField = document.getElementById("class-field");
 
 const ticketNameElement = document.getElementById("ticket-name");
 const priceRateElement = document.getElementById("price-rate");
@@ -55,16 +56,25 @@ const handleTicketPrice = (distance, age) => {
 /**
  * Returns a message with the name of the ticket rate
  * @param {number} age
+ * @param {string} trainClass
  * @returns {string}
  */
-const handleTicketRate = (age) => {
+const handleTicketRate = (age, trainClass) => {
+	let message = "Tariffa ";
+
+	if (trainClass !== "none") {
+		message = `Tariffa ${trainClass} `;
+	}
+
 	if (age < 18) {
-		return "Tariffa Giovani";
+		message += "Giovani";
 	}
+
 	if (age >= 65) {
-		return "Tariffa Senior";
+		message += "Senior";
 	}
-	return "Tariffa Standard";
+
+	return message;
 };
 
 /**
@@ -76,9 +86,25 @@ const handleTicketRate = (age) => {
 const getRandomNumber = (min, max) =>
 	Math.floor(Math.random() * (max - min + 1)) + min;
 
-const handleCoachNumber = () => getRandomNumber(1, 10);
-
 const handleCpCode = () => getRandomNumber(90000, 99999);
+
+const handleCoachNumber = (trainClass) => {
+	if (trainClass === "none") {
+		return getRandomNumber(1, 10);
+	}
+	if (trainClass === "Executive") {
+		return 1;
+	}
+	if (trainClass === "Business") {
+		return getRandomNumber(2, 4);
+	}
+	if (trainClass === "Premium") {
+		return 5;
+	}
+	if (trainClass === "Standard") {
+		return getRandomNumber(6, 10);
+	}
+};
 
 confirmButtonElement.addEventListener("click", (event) => {
 	// Prevent refresh
@@ -88,14 +114,15 @@ confirmButtonElement.addEventListener("click", (event) => {
 	const name = nameField.value;
 	const age = ageField.value;
 	const distance = routeLengthField.value;
-	console.log(name, distance, age);
+	const trainClass = classField.value;
+	console.log(name, distance, age, trainClass);
 
 	// Calculate the price of the ticket
 	const ticket = handleTicketPrice(distance, age);
 	// Get the name of the ticket rate
-	const priceRate = handleTicketRate(age);
+	const priceRate = handleTicketRate(age, trainClass);
 	// Get the coach number
-	const coachNumber = handleCoachNumber();
+	const coachNumber = handleCoachNumber(trainClass);
 	// Get a code for the ticket
 	const cpCode = handleCpCode();
 	console.log(ticket, priceRate, coachNumber, cpCode);
@@ -116,4 +143,5 @@ cancelButtonElement.addEventListener("click", (event) => {
 	nameField.value = "";
 	ageField.value = "";
 	routeLengthField.value = "";
+	classField.value = "none";
 });
