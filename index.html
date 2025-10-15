@@ -15,7 +15,7 @@
 
 </head>
 
-<body class="bg-primary">
+<body class="bg-danger">
     <div class="container">
         <form class="row text-center rounded my-5 bg-light-subtle" id="form" action="">
             <h1 class="my-3">Calcola il prezzo del biglietto</h1>
@@ -38,48 +38,43 @@
                 <input id="age-field" class="form-control mx-auto w-75" type="text" inputmode="numeric">
             </div>
             <div class="my-3">
-                <button class="btn btn-primary">Conferma</button>
+                <button class="btn btn-danger">Conferma</button>
             </div>
         </form>
 
-        <div id="ticket" class="row gap-1 rounded text-center my-5 bg-light">
-            <h1>Biglietto</h1>
-            <div class="col-12 col-md-3">
-                <p>
+        <div class="row gap-1 rounded my-5 bg-light">
+            <h1 class="pt-3 ps-3">BIGLIETTO</h1>
+
+            <div class="col-4 p-4">
+                <p class="fw-light">
                     Passeggero:
-                    <span id="ticket-name"></span>
+                    <span id="ticket-name" class="text-uppercase fw-bold"></span>
                 </p>
-
-            </div>
-            <div class="col-12 col-md-2">
-                <p>
-                    Offerta:
-                    <span id="price-rate"></span>
-                </p>
-
-            </div>
-            <div class="col-12 col-md-2">
-                <p>
-                    Carrozza:
-                    <span id="coach-number"></span>
-                </p>
-
-            </div>
-            <div class="col-12 col-md-2">
-                <p>
+                <p class="fw-light">
                     Codice CP:
-                    <span id="cp-code"></span>
+                    <span id="cp-code" class="fw-bold"></span>
+                </p>
+            </div>
+
+            <div class="col-3 p-4">
+                <p class="fw-light">
+                    Offerta:
+                    <span id="price-rate" class="fw-bold"></span>
+                </p>
+
+                <p class="fw-light">
+                    Carrozza:
+                    <span id="coach-number" class="fw-bold"></span>
                 </p>
 
             </div>
-            <div class="col-12 col-md-2">
-                <p>
-                    Prezzo:
-                    <span id="ticket-price"></span>
-                </p>
-
+            <div class="col-4 p-4">
+                <div class="mx-auto w-75 p-3 rounded-5 text-center align-middle text-white fw-bold bg-danger">
+                    <span id="ticket-price" class="fs-5"></span>
+                    <br>
+                    <span>Prezzo</span>
+                </div>
             </div>
-
         </div>
 
     </div>
