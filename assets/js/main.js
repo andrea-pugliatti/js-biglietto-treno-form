@@ -102,6 +102,6 @@ buttonElement.addEventListener("click", (event) => {
 	ticketNameElement.textContent = name;
 	priceRateElement.textContent = priceRate;
 	coachNumberElement.textContent = coachNumber;
-	cpCodeElement.textContent = cpCode;
-	ticketPriceElement.textContent = ticket;
+	cpCodeElement.textContent = `#${cpCode}`;
+	ticketPriceElement.textContent = `${ticket}€`;
 });
