@@ -65,6 +65,19 @@ const handleTicketRate = (age) => {
 	return "Tariffa Standard";
 };
 
+/**
+ * Returns a random number between min and max
+ * @param {number} min
+ * @param {number} max
+ * @returns {number}
+ */
+const getRandomNumber = (min, max) =>
+	Math.floor(Math.random() * (max - min + 1)) + min;
+
+const handleCoachNumber = () => getRandomNumber(1, 10);
+
+const handleCpCode = () => getRandomNumber(90000, 99999);
+
 buttonElement.addEventListener("click", (event) => {
 	// Prevent refresh
 	event.preventDefault();
@@ -77,12 +90,13 @@ buttonElement.addEventListener("click", (event) => {
 
 	// Calculate the price of the ticket
 	const ticket = handleTicketPrice(distance, age);
-	console.log(ticket);
-
+	// Get the name of the ticket rate
 	const priceRate = handleTicketRate(age);
-	const coachNumber = 5;
-	const cpCode = 939293;
-	console.log(priceRate, coachNumber, cpCode);
+	// Get the coach number
+	const coachNumber = handleCoachNumber();
+	// Get a code for the ticket
+	const cpCode = handleCpCode();
+	console.log(ticket, priceRate, coachNumber, cpCode);
 
 	// Print on Screen
 	ticketNameElement.textContent = name;
