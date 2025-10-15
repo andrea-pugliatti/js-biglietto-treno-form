@@ -50,6 +50,21 @@ const handleTicketPrice = (distance, age) => {
 	return cost.toFixed(2);
 };
 
+/**
+ * Returns a message with the name of the ticket rate
+ * @param {number} age
+ * @returns {string}
+ */
+const handleTicketRate = (age) => {
+	if (age < 18) {
+		return "Tariffa Giovani";
+	}
+	if (age >= 65) {
+		return "Tariffa Senior";
+	}
+	return "Tariffa Standard";
+};
+
 buttonElement.addEventListener("click", (event) => {
 	// Prevent refresh
 	event.preventDefault();
@@ -64,7 +79,7 @@ buttonElement.addEventListener("click", (event) => {
 	const ticket = handleTicketPrice(distance, age);
 	console.log(ticket);
 
-	const priceRate = "";
+	const priceRate = handleTicketRate(age);
 	const coachNumber = 5;
 	const cpCode = 939293;
 	console.log(priceRate, coachNumber, cpCode);
