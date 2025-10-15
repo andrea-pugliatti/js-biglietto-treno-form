@@ -21,7 +21,9 @@ const priceRateElement = document.getElementById("price-rate");
 const coachNumberElement = document.getElementById("coach-number");
 const cpCodeElement = document.getElementById("cp-code");
 const ticketPriceElement = document.getElementById("ticket-price");
-const buttonElement = document.querySelector("button");
+
+const confirmButtonElement = document.getElementById("confirm");
+const cancelButtonElement = document.getElementById("cancel");
 
 /**
  * Calculate the price of the ticket
@@ -78,7 +80,7 @@ const handleCoachNumber = () => getRandomNumber(1, 10);
 
 const handleCpCode = () => getRandomNumber(90000, 99999);
 
-buttonElement.addEventListener("click", (event) => {
+confirmButtonElement.addEventListener("click", (event) => {
 	// Prevent refresh
 	event.preventDefault();
 
@@ -104,4 +106,14 @@ buttonElement.addEventListener("click", (event) => {
 	coachNumberElement.textContent = coachNumber;
 	cpCodeElement.textContent = `#${cpCode}`;
 	ticketPriceElement.textContent = `${ticket}€`;
+});
+
+cancelButtonElement.addEventListener("click", (event) => {
+	// Prevent refresh
+	event.preventDefault();
+
+	// Reset fields
+	nameField.value = "";
+	ageField.value = "";
+	routeLengthField.value = "";
 });
