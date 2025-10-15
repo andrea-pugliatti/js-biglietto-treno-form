@@ -14,10 +14,14 @@ va applicato uno sconto del 40% per gli over 65.
 // Select elements
 const routeLengthField = document.getElementById("route-length-field");
 const ageField = document.getElementById("age-field");
-const buttonElement = document.querySelector("button");
+const nameField = document.getElementById("name-field");
 
-let distance;
-let age;
+const ticketNameElement = document.getElementById("ticket-name");
+const priceRateElement = document.getElementById("price-rate");
+const coachNumberElement = document.getElementById("coach-number");
+const cpCodeElement = document.getElementById("cp-code");
+const ticketPriceElement = document.getElementById("ticket-price");
+const buttonElement = document.querySelector("button");
 
 /**
  * Calculate the price of the ticket
@@ -25,7 +29,7 @@ let age;
  * @param {number} age
  * @returns {number}
  */
-const handleTicket = (distance, age) => {
+const handleTicketPrice = (distance, age) => {
 	const price_by_km = 0.21;
 	const minor_discount = 0.2;
 	const senior_discount = 0.4;
@@ -51,11 +55,24 @@ buttonElement.addEventListener("click", (event) => {
 	event.preventDefault();
 
 	// Save values on click
-	age = ageField.value;
-	distance = routeLengthField.value;
-	console.log(distance, age);
+	const name = nameField.value;
+	const age = ageField.value;
+	const distance = routeLengthField.value;
+	console.log(name, distance, age);
 
 	// Calculate the price of the ticket
-	const ticket = handleTicket(distance, age);
+	const ticket = handleTicketPrice(distance, age);
 	console.log(ticket);
+
+	const priceRate = "";
+	const coachNumber = 5;
+	const cpCode = 939293;
+	console.log(priceRate, coachNumber, cpCode);
+
+	// Print on Screen
+	ticketNameElement.textContent = name;
+	priceRateElement.textContent = priceRate;
+	coachNumberElement.textContent = coachNumber;
+	cpCodeElement.textContent = cpCode;
+	ticketPriceElement.textContent = ticket;
 });
