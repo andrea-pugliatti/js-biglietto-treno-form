@@ -18,7 +18,11 @@
     <form id="form" action="">
         <h1>Calcola il prezzo del biglietto</h1>
 
-        <label for="route-length-field">Numero di chilometri da percorrere</label>
+        <label for="name-field">Nome</label>
+        <input id="name-field" type="number" min="1">
+
+
+        <label for="route-length-field">Chilometri da percorrere</label>
         <input id="route-length-field" type="number" min="1">
 
         <label for="age-field">Età del passeggero</label>
@@ -27,7 +31,30 @@
         <button>Conferma</button>
     </form>
 
-    <div></div>
+    <div id="ticket">
+        <h1>Biglietto</h1>
+        <p>
+            Passeggero:
+            <span id="ticket-name"></span>
+        </p>
+        <p>
+            Offerta:
+            <span id="price-rate"></span>
+        </p>
+        <p>
+            Carrozza:
+            <span id="coach-number"></span>
+        </p>
+        <p>
+            Codice CP:
+            <span id="cp-code"></span>
+        </p>
+        <p>
+            Prezzo:
+            <span id="ticket-price"></span>
+        </p>
+
+    </div>
 
     <script src="./assets/js/main.js"></script>
 </body>
