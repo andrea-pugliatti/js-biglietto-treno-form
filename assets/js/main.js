@@ -25,9 +25,10 @@ const ticketPriceElement = document.getElementById("ticket-price");
 
 const confirmButtonElement = document.getElementById("confirm");
 const cancelButtonElement = document.getElementById("cancel");
+const ticketElement = document.getElementById("ticket");
 
 /**
- * Calculate the price of the ticket
+ * Calculate the price of the ticket.
  * @param {number} distance
  * @param {number} age
  * @returns {number}
@@ -54,7 +55,7 @@ const handleTicketPrice = (distance, age) => {
 };
 
 /**
- * Returns a message with the name of the ticket rate
+ * Returns a message with the name of the ticket rate.
  * @param {number} age
  * @param {string} trainClass
  * @returns {string}
@@ -78,7 +79,7 @@ const handleTicketRate = (age, trainClass) => {
 };
 
 /**
- * Returns a random number between min and max
+ * Returns a random number between a min number and a max number.
  * @param {number} min
  * @param {number} max
  * @returns {number}
@@ -86,8 +87,17 @@ const handleTicketRate = (age, trainClass) => {
 const getRandomNumber = (min, max) =>
 	Math.floor(Math.random() * (max - min + 1)) + min;
 
+/**
+ * Returns a random number between 90000 and 99999 for the CP Code.
+ * @returns {number}
+ */
 const handleCpCode = () => getRandomNumber(90000, 99999);
 
+/**
+ * Returns the coach number based on the train class.
+ * @param {string} trainClass
+ * @returns {number}
+ */
 const handleCoachNumber = (trainClass) => {
 	if (trainClass === "none") {
 		return getRandomNumber(1, 10);
@@ -106,14 +116,25 @@ const handleCoachNumber = (trainClass) => {
 	}
 };
 
+/**
+ * Resets the form fields.
+ */
+const resetFormFields = () => {
+	// Reset fields
+	nameField.value = "";
+	ageField.value = "";
+	routeLengthField.value = "";
+	classField.value = "none";
+};
+
 confirmButtonElement.addEventListener("click", (event) => {
 	// Prevent refresh
 	event.preventDefault();
 
 	// Save values on click
 	const name = nameField.value;
-	const age = ageField.value;
-	const distance = routeLengthField.value;
+	const age = Number(ageField.value);
+	const distance = Number(routeLengthField.value);
 	const trainClass = classField.value;
 	console.log(name, distance, age, trainClass);
 
@@ -127,12 +148,32 @@ confirmButtonElement.addEventListener("click", (event) => {
 	const cpCode = handleCpCode();
 	console.log(ticket, priceRate, coachNumber, cpCode);
 
-	// Print on Screen
-	ticketNameElement.textContent = name;
-	priceRateElement.textContent = priceRate;
-	coachNumberElement.textContent = coachNumber;
-	cpCodeElement.textContent = `#${cpCode}`;
-	ticketPriceElement.textContent = `${ticket}€`;
+	// Check the input
+	let isBadInput = false;
+	// Check for NaN
+	if (Number.isNaN(distance) || Number.isNaN(age)) {
+		isBadInput = true;
+	}
+	// Check for less than 0
+	if (distance < 0 || age < 0) {
+		isBadInput = true;
+	}
+
+	if (isBadInput) {
+		// Reset fields
+		resetFormFields();
+		console.error("Input inaspettati.");
+	} else {
+		// Print on Screen
+		ticketNameElement.textContent = name;
+		priceRateElement.textContent = priceRate;
+		coachNumberElement.textContent = coachNumber;
+		cpCodeElement.textContent = `#${cpCode}`;
+		ticketPriceElement.textContent = `${ticket}€`;
+
+		// Show ticket
+		ticketElement.classList.remove("d-none");
+	}
 });
 
 cancelButtonElement.addEventListener("click", (event) => {
@@ -140,8 +181,8 @@ cancelButtonElement.addEventListener("click", (event) => {
 	event.preventDefault();
 
 	// Reset fields
-	nameField.value = "";
-	ageField.value = "";
-	routeLengthField.value = "";
-	classField.value = "none";
+	resetFormFields();
+
+	// Remove ticket
+	ticketElement.classList.add("d-none");
 });
